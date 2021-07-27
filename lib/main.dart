@@ -35,10 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            textStyle: TextStyle(color: Colors.amber),
-            primary: Colors.blueAccent,
+            primary: Colors.greenAccent,
             shadowColor: Colors.amber,
-            onPrimary: Colors.white,
+            onPrimary: Colors.black,
           ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
@@ -68,45 +67,46 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("CRUD APP"),
-        ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: Center(
-                child: OutlinedButton(
-                  child: Text("Show"),
-                  onPressed: () {},
-                ),
+      appBar: AppBar(
+        title: Text("CRUD APP"),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Center(
+              child: OutlinedButton(
+                child: Text("Show"),
+                onPressed: () {},
               ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return Dialog();
-                          });
-                    },
-                    child: Text("Add New"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Update"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Delete"),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ));
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) {
+                          return Dialog();
+                        });
+                  },
+                  child: Text("Add New"),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Update"),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Delete"),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
