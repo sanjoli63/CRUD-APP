@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-// import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,26 +25,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
-        textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: TextStyle(
-                fontFamily: 'OpenSans',
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-              button: TextStyle(color: Colors.white),
-            ),
-        appBarTheme: AppBarTheme(
-          textTheme: ThemeData.light().textTheme.copyWith(
-                headline6: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(primary: Colors.deepOrangeAccent),
-        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             primary: Colors.greenAccent,
@@ -56,7 +37,14 @@ class MyApp extends StatelessWidget {
               primary: Colors.black, backgroundColor: Colors.deepOrangeAccent),
         ),
       ),
-      home: MyHomePage(),
+      home: AnimatedSplashScreen(
+        splash: Splash(),
+        nextScreen: MyHomePage(),
+        splashTransition: SplashTransition.decoratedBoxTransition,
+        backgroundColor: Colors.redAccent,
+        duration: 2000,
+        splashIconSize: double.maxFinite,
+      ),
     );
   }
 }
