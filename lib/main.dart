@@ -116,12 +116,56 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 ElevatedButton(
+                  child: Text("Add New"),
                   onPressed: () {
                     showDialog(
                         context: context,
                         builder: (_) {
                           return Dialog(
-                              child: Container(
+                            child: Container(
+                              padding: EdgeInsets.all(32),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  TextField(
+                                    controller: _idController,
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  TextField(
+                                    controller: _nameController,
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      final key = _idController.text;
+                                      final value = _nameController.text;
+                                      friendsBox!.put(key, value);
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Submit",
+                                      style: TextStyle(color: Colors.teal),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                ),
+                ElevatedButton(
+                  child: Text("Update"),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return Dialog(
+                          child: Container(
                             padding: EdgeInsets.all(32),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -152,19 +196,42 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ],
                             ),
-                          ));
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                ElevatedButton(
+                  child: Text("Delete"),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) {
+                          return Dialog(
+                            child: Container(
+                                padding: EdgeInsets.all(32),
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: _idController,
+                                      ),
+                                      SizedBox(height: 16),
+                                      ElevatedButton(
+                                        child: Text("submit"),
+                                        onPressed: () {
+                                          final key = _idController.text;
+
+                                          friendsBox!.delete(key);
+                                          Navigator.pop(context);
+                                        },
+                                      )
+                                    ])),
+                          );
                         });
                   },
-                  child: Text("Add New"),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Update"),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Delete"),
-                ),
+                )
               ],
             ),
           )
