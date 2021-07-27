@@ -1,9 +1,7 @@
 # [CRUD APP]
 ## Video
- <video width="320" height="240" controls>
-  <source src="https://user-images.githubusercontent.com/71957235/127148528-9d9962ed-658d-4a75-b13e-54ed327e83c5.mp4" type="video/mp4">
-
-</video>
+https://user-images.githubusercontent.com/71957235/127148528-9d9962ed-658d-4a75-b13e-54ed327e83c5.mp4
+## Screenshots
 ### Splash Screen
 <img src = "https://user-images.githubusercontent.com/71957235/127143031-87f37b4b-1418-4e4b-9ced-074b468ccc90.png" width =250>
 ### Home Page
@@ -15,6 +13,8 @@
 ### No Data
 <img src="https://user-images.githubusercontent.com/71957235/127143277-99a408ac-3b6a-4a96-ab09-ce4f670b4f4b.png" width=250>
 
+## Video
+https://user-images.githubusercontent.com/71957235/127148528-9d9962ed-658d-4a75-b13e-54ed327e83c5.mp4
 ## Features
 ```
 1. Splash Screen
