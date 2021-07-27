@@ -17,8 +17,8 @@ class _SplashState extends State<Splash> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 190.0,
-            height: 190.0,
+            width: 200.0,
+            height: 200.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
             height: 30,
           ),
           SpinKitFadingCube(
-            color: Colors.grey,
+            color: Colors.greenAccent,
           ),
         ],
       ),
