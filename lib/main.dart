@@ -34,7 +34,12 @@ class MyApp extends StatelessWidget {
           style: TextButton.styleFrom(primary: Colors.deepOrangeAccent),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(primary: Colors.greenAccent),
+          style: ElevatedButton.styleFrom(
+            textStyle: TextStyle(color: Colors.amber),
+            primary: Colors.blueAccent,
+            shadowColor: Colors.amber,
+            onPrimary: Colors.white,
+          ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
@@ -76,6 +81,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return Dialog();
+                          });
+                    },
+                    child: Text("Add New"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Update"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Delete"),
+                  ),
+                ],
+              ),
+            )
           ],
         ));
   }
