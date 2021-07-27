@@ -1,5 +1,6 @@
 # [CRUD APP]
-
+## Video
+<video src "https://user-images.githubusercontent.com/71957235/127148528-9d9962ed-658d-4a75-b13e-54ed327e83c5.mp4" width = 250 height =150>
 ## Screenshots
 ### Splash Screen
 <img src = "https://user-images.githubusercontent.com/71957235/127143031-87f37b4b-1418-4e4b-9ced-074b468ccc90.png" width =250>

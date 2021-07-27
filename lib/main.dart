@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             primary: Colors.greenAccent,
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
         splash: Splash(),
         nextScreen: MyHomePage(),
-        splashTransition: SplashTransition.decoratedBoxTransition,
+        splashTransition: SplashTransition.fadeTransition,
         backgroundColor: Colors.redAccent,
         duration: 2000,
         splashIconSize: double.maxFinite,
@@ -204,12 +203,22 @@ class _MyHomePageState extends State<MyHomePage> {
                               children: <Widget>[
                                 TextField(
                                   controller: _idController,
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.account_circle),
+                                    hintText: 'Id',
+                                    border: OutlineInputBorder(),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 16,
                                 ),
                                 TextField(
                                   controller: _nameController,
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.attribution_outlined),
+                                    hintText: 'Name',
+                                    border: OutlineInputBorder(),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 16,
@@ -220,6 +229,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     final value = _nameController.text;
                                     friendsBox!.put(key, value);
                                     Navigator.pop(context);
+                                    // _idController.clear();
+                                    // _nameController.clear();
                                   },
                                   child: Text(
                                     "Submit",
