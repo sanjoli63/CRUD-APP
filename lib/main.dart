@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -85,15 +86,31 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: Center(
-              child: OutlinedButton(
-                child: Text("Show"),
-                onPressed: () {
-                  print(friendsBox!.getAt(0));
+              child: ValueListenableBuilder(
+            valueListenable: friendsBox!.listenable(),
+            builder: (context, Box<String> friends, _) {
+              return ListView.separated(
+                itemBuilder: (context, index) {
+                  final key = friendsBox!.keys.toList()[index];
+                  final value = friends.get(key);
+                  return ListTile(
+                    title: Text(
+                      value!,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    ),
+                    subtitle: Text(
+                      key,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    ),
+                  );
                 },
-              ),
-            ),
-          ),
+                separatorBuilder: (_, index) => Divider(),
+                itemCount: friends.keys.toList().length,
+              );
+            },
+          )),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
