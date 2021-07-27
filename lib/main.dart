@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'splash.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -78,26 +80,55 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ValueListenableBuilder(
             valueListenable: friendsBox!.listenable(),
             builder: (context, Box<String> friends, _) {
-              return ListView.separated(
-                itemBuilder: (context, index) {
-                  final key = friendsBox!.keys.toList()[index];
-                  final value = friends.get(key);
-                  return ListTile(
-                    title: Text(
-                      value!,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                    ),
-                    subtitle: Text(
-                      key,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                    ),
-                  );
-                },
-                separatorBuilder: (_, index) => Divider(),
-                itemCount: friends.keys.toList().length,
-              );
+              return friends.isEmpty
+                  ? LayoutBuilder(builder: (ctx, constraints) {
+                      return Column(
+                        children: <Widget>[
+                          Text(
+                            'No Data added yet!',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Container(
+                              height: constraints.maxHeight * 0.4,
+                              child: SvgPicture.asset(
+                                'assets/undraw_No_data_re_kwbl.svg',
+                                fit: BoxFit.cover,
+                              )),
+                        ],
+                      );
+                    })
+                  : ListView.separated(
+                      itemCount: friends.keys.toList().length,
+                      itemBuilder: (context, index) {
+                        final key = friendsBox!.keys.toList()[index];
+                        final value = friends.get(key);
+                        return Container(
+                          child: ListTile(
+                            title: Text(
+                              value!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
+                            subtitle: Text(
+                              key,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
+                            trailing: TextButton.icon(
+                              icon: const Icon(Icons.delete),
+                              label: const Text('Delete'),
+                              onPressed: () {
+                                friendsBox!.delete(key);
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (_, index) => Divider(),
+                    );
             },
           )),
           Container(
@@ -118,12 +149,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: <Widget>[
                                   TextField(
                                     controller: _idController,
+                                    decoration: InputDecoration(
+                                      icon: Icon(Icons.account_circle),
+                                      hintText: 'Id',
+                                      border: OutlineInputBorder(),
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 16,
                                   ),
                                   TextField(
                                     controller: _nameController,
+                                    decoration: InputDecoration(
+                                      icon: Icon(Icons.attribution_outlined),
+                                      hintText: 'Name',
+                                      border: OutlineInputBorder(),
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 16,
@@ -134,6 +175,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       final value = _nameController.text;
                                       friendsBox!.put(key, value);
                                       Navigator.pop(context);
+                                      _idController.clear();
+                                      _nameController.clear();
                                     },
                                     child: Text(
                                       "Submit",
